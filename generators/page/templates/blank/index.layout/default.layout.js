@@ -1,4 +1,4 @@
-import { ui } from './exports'
+import { ui } from '../<%- pageName %>.vender'
 import * as style from './default.style'
 
 const layout = {

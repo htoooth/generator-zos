@@ -1,4 +1,4 @@
-import { ui } from './exports'
+import { ui } from '../<%- pageName %>.vender'
 import * as defaultView from './default.layout'
 import * as style from './index.b.style'
 

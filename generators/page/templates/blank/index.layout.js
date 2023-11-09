@@ -1,4 +1,4 @@
-import { ui, log } from './<%- pageName %>.layout/exports'
+import { ui, log } from './<%- pageName %>.vender'
 import * as view from './<%- pageName %>.layout/index'
 import * as style from './<%- pageName %>.style'
 

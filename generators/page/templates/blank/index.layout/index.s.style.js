@@ -1,2 +1,2 @@
-import { ui } from './exports'
+import { ui } from '../<%- pageName %>.vender'
 export * as defaultStyle from './default.style'

@@ -1,7 +1,7 @@
-import { ui, px, DEVICE_WIDTH, getText } from './<%- pageName %>.layout/exports'
+import { ui, px, DEVICE_WIDTH, getText } from './<%- pageName %>.vender'
 
 export const TEXT_STYLE = {
-  text: 'hello!',
+  text: '<%- pageName %>',
   x: px(42),
   y: px(100),
   w: DEVICE_WIDTH - px(42) * 2,

@@ -1,4 +1,4 @@
-import { px, DEVICE_WIDTH, DEVICE_HEIGHT } from './exports'
+import { px, DEVICE_WIDTH, DEVICE_HEIGHT } from '../<%- pageName %>.vender'
 
 export const center = {
   x: px(DEVICE_WIDTH / 2),
