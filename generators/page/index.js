@@ -17,32 +17,36 @@ module.exports = class extends Generator {
 
       this.fs.copy(
         this.templatePath('blank/index.layout'),
-        this.destinationPath(path.join('page', dirPath, `${pageName}.layout` )),
+        this.destinationPath(path.join('page', dirPath, `${pageName}.layout`)),
       )
 
       this.fs.copyTpl(
         this.templatePath('blank/index.page.js'),
-        this.destinationPath(path.join('page', dirPath, `${pageName}.page.js` )),
+        this.destinationPath(path.join('page', dirPath, `${pageName}.page.js`)),
         {
           pageName,
-        }
-      );
+        },
+      )
 
       this.fs.copyTpl(
         this.templatePath('blank/index.layout.js'),
-        this.destinationPath(path.join('page', dirPath, `${pageName}.layout.js` )),
+        this.destinationPath(
+          path.join('page', dirPath, `${pageName}.layout.js`),
+        ),
         {
           pageName,
-        }
-      );
+        },
+      )
 
       this.fs.copyTpl(
         this.templatePath('blank/index.style.js'),
-        this.destinationPath(path.join('page', dirPath, `${pageName}.style.js` )),
+        this.destinationPath(
+          path.join('page', dirPath, `${pageName}.style.js`),
+        ),
         {
           pageName,
-        }
-      );
+        },
+      )
 
       const appPkg = this.fs.readJSON(this.destinationPath('app.json'), {})
       const targets = appPkg.targets
