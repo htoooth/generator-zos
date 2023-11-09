@@ -1,6 +1,7 @@
 'use strict'
 const Generator = require('yeoman-generator')
 const path = require('path')
+const chalk = require('chalk')
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -25,7 +26,7 @@ module.exports = class extends Generator {
       }
 
       default: {
-        this.log('not support action', this.options.action)
+        this.log(chalk.red('not support action', this.options.action))
       }
     }
   }
@@ -61,6 +62,19 @@ module.exports = class extends Generator {
     if (this.options.pagePath) {
       const dirPath = path.dirname(this.options.pagePath)
       const pageName = path.basename(this.options.pagePath)
+
+      const appPkg = this.fs.readJSON(this.destinationPath('app.json'), {})
+      const targets = appPkg.targets
+
+      for (let v of Object.values(targets)) {
+        const page = `page/${dirPath}/${pageName}.page`
+        if (v.module.page.pages.indexOf(page) >= 0) {
+          this.log(chalk.red('ERROR: dup page path ' + page))
+          return
+        }
+
+        v.module.page.pages.unshift(`page/${dirPath}/${pageName}.page`)
+      }
 
       this.fs.copyTpl(
         this.templatePath('blank/index.vender.js'),
@@ -108,15 +122,11 @@ module.exports = class extends Generator {
         },
       )
 
-      const appPkg = this.fs.readJSON(this.destinationPath('app.json'), {})
-      const targets = appPkg.targets
-
-      Object.values(targets).forEach((v) => {
-        // V.module.page.pages.push(`page/${dirPath}/${pageName}.page`)
-        v.module.page.pages.unshift(`page/${dirPath}/${pageName}.page`)
-      })
-
       this.fs.writeJSON(this.destinationPath('app.json'), appPkg)
     }
+  }
+
+  conflicts() {
+    this.conflicter.force = true
   }
 }
