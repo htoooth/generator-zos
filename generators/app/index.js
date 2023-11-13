@@ -23,9 +23,11 @@ module.exports = class extends Generator {
       case 'create': {
         break
       }
+
       case 'init': {
         break
       }
+
       default: {
         this.log(
           yosay(
@@ -36,13 +38,9 @@ module.exports = class extends Generator {
     }
   }
 
-  _genBlankProject() {
+  _genBlankProject() {}
 
-  }
-
-  _initBlankProject() {
-
-  }
+  _initBlankProject() {}
 
   writing() {
     switch (this.options.action) {
@@ -50,10 +48,12 @@ module.exports = class extends Generator {
         this._genBlankProject()
         break
       }
+
       case 'init': {
         this._initBlankProject()
         break
       }
+
       default: {
       }
     }
@@ -62,8 +62,8 @@ module.exports = class extends Generator {
   install() {
     if (this.options.install) {
       this.installDependencies({
-        npm: true
-      });
+        npm: true,
+      })
     }
   }
 }

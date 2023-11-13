@@ -13,7 +13,7 @@ module.exports = class extends Generator {
       type: Boolean,
       default: false,
       description: 'include layout feature',
-      alias: 'l'
+      alias: 'l',
     })
   }
 
@@ -89,7 +89,7 @@ module.exports = class extends Generator {
         ),
         {
           pageName,
-          layout: this.options.layout
+          layout: this.options.layout,
         },
       )
 
@@ -101,7 +101,7 @@ module.exports = class extends Generator {
           ),
           {
             pageName,
-            layout: this.options.layout
+            layout: this.options.layout,
           },
         )
       }
@@ -111,7 +111,7 @@ module.exports = class extends Generator {
         this.destinationPath(path.join('page', dirPath, `${pageName}.page.js`)),
         {
           pageName,
-          layout: this.options.layout
+          layout: this.options.layout,
         },
       )
 
@@ -122,7 +122,7 @@ module.exports = class extends Generator {
         ),
         {
           pageName,
-          layout: this.options.layout
+          layout: this.options.layout,
         },
       )
 
@@ -133,7 +133,7 @@ module.exports = class extends Generator {
         ),
         {
           pageName,
-          layout: this.options.layout
+          layout: this.options.layout,
         },
       )
 
