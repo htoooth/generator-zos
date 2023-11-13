@@ -78,5 +78,8 @@
     "test": "jest"
   },
   "repository": "htoooth/generator-zos",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  },
   "license": "MIT"
 }

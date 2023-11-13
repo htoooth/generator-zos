@@ -7,8 +7,14 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts)
 
-    this.argument('action', { type: String, required: true })
-    this.argument('pagePath', { type: String, required: true })
+    this.argument('action', { type: String, required: false })
+    this.argument('pagePath', { type: String, required: false })
+    this.option('layout', {
+      type: Boolean,
+      default: false,
+      description: 'include layout feature',
+      alias: 'l'
+    })
   }
 
   writing() {
@@ -83,22 +89,29 @@ module.exports = class extends Generator {
         ),
         {
           pageName,
+          layout: this.options.layout
         },
       )
 
-      this.fs.copyTpl(
-        this.templatePath('blank/index.layout'),
-        this.destinationPath(path.join('page', dirPath, `${pageName}.layout`)),
-        {
-          pageName,
-        },
-      )
+      if (this.options.layout) {
+        this.fs.copyTpl(
+          this.templatePath('blank/index.layout'),
+          this.destinationPath(
+            path.join('page', dirPath, `${pageName}.layout`),
+          ),
+          {
+            pageName,
+            layout: this.options.layout
+          },
+        )
+      }
 
       this.fs.copyTpl(
         this.templatePath('blank/index.page.js'),
         this.destinationPath(path.join('page', dirPath, `${pageName}.page.js`)),
         {
           pageName,
+          layout: this.options.layout
         },
       )
 
@@ -109,6 +122,7 @@ module.exports = class extends Generator {
         ),
         {
           pageName,
+          layout: this.options.layout
         },
       )
 
@@ -119,6 +133,7 @@ module.exports = class extends Generator {
         ),
         {
           pageName,
+          layout: this.options.layout
         },
       )
 

@@ -1,4 +1,5 @@
 import { log as Logger } from '@zos/utils'
+import { push } from './<%- pageName %>.vender'
 import * as pageView from './<%- pageName %>.layout'
 
 const logger = Logger.getLogger('<%- pageName %>.page')
@@ -20,5 +21,11 @@ Page({
 
   click() {
     pageView.methods.updateText('clickAgain')
+  },
+
+  clickBack() {
+    push({
+      index: 1
+    })
   }
 })

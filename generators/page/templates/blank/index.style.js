@@ -29,3 +29,9 @@ export const BTN_STYLE2 = {
   y: BTN_STYLE.y + px(100),
   text: 'click me2',
 }
+
+export const BTN_STYLE3 = {
+  ...BTN_STYLE2,
+  y: BTN_STYLE2.y + px(100),
+  text: 'back',
+}
