@@ -36,6 +36,10 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "deep-extend": "^0.6.0",
+    "lodash": "^4.17.21",
+    "mkdirp": "^3.0.1",
+    "postcss": "^8.4.31",
+    "postcss-js": "^4.0.1",
     "yeoman-generator": "^3.1.1",
     "yosay": "^2.0.2"
   },

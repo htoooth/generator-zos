@@ -137,6 +137,17 @@ module.exports = class extends Generator {
         },
       )
 
+      // This.fs.copyTpl(
+      //   this.templatePath('blank/index.style.css'),
+      //   this.destinationPath(
+      //     path.join('page', dirPath, `${pageName}.style.css`),
+      //   ),
+      //   {
+      //     pageName,
+      //     layout: this.options.layout,
+      //   },
+      // )
+
       this.fs.writeJSON(this.destinationPath('app.json'), appPkg)
     }
   }

@@ -1,31 +1,32 @@
-import { log as Logger } from '@zos/utils'
 import { push } from './<%- pageName %>.vender'
 import * as pageView from './<%- pageName %>.layout'
+import { BasePage } from '@zeppos/zml/base-page'
 
-const logger = Logger.getLogger('<%- pageName %>.page')
+Page(
+  BasePage({
+    name: '<%- pageName %>.page',
+    state: {},
+    onInit() {
+      this.log('page onInit invoked')
+    },
 
-Page({
-  state: {},
-  onInit() {
-    logger.log('page onInit invoked')
-  },
+    build() {
+      this.log('page build invoked')
+      pageView.layout.render(this)
+    },
 
-  build() {
-    logger.log('page build invoked')
-    pageView.layout.render(this)
-  },
+    onDestroy() {
+      this.log('page onDestroy invoked')
+    },
 
-  onDestroy() {
-    logger.log('page onDestroy invoked')
-  },
+    click() {
+      pageView.methods.updateText('clickAgain')
+    },
 
-  click() {
-    pageView.methods.updateText('clickAgain')
-  },
-
-  clickBack() {
-    push({
-      index: 1
-    })
-  }
-})
+    clickBack() {
+      push({
+        index: 1,
+      })
+    },
+  }),
+)

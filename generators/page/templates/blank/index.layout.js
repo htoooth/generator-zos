@@ -6,31 +6,31 @@ import * as style from './<%- pageName %>.style'
 
 const layout = {
   <%_ if (layout) { _%>
-  childLayout: view,
+  $childLayout: view,
   <%_ } _%>
-  refs: {},
+  $refs: {},
   render(vm) {
     <%_ if (layout) { _%>
     view.layout.render(vm)
 
     <%_ } _%>
-    this.refs.txt1 = ui.createWidget(ui.widget.TEXT, style.TEXT_STYLE)
+    this.$refs.txt1 = ui.createWidget(ui.widget.TEXT, style.TEXT_STYLE)
 
-    this.refs.btn1 = ui.createWidget(ui.widget.BUTTON, {
+    this.$refs.btn1 = ui.createWidget(ui.widget.BUTTON, {
       ...style.BTN_STYLE,
       click_func: () => {
         this.clickMe()
       },
     })
 
-    this.refs.btn2 = ui.createWidget(ui.widget.BUTTON, {
+    this.$refs.btn2 = ui.createWidget(ui.widget.BUTTON, {
       ...style.BTN_STYLE2,
       click_func: () => {
         vm.click()
       },
     })
 
-    this.refs.btn3 = ui.createWidget(ui.widget.BUTTON, {
+    this.$refs.btn3 = ui.createWidget(ui.widget.BUTTON, {
       ...style.BTN_STYLE3,
       click_func: () => {
         vm.clickBack()
@@ -39,7 +39,7 @@ const layout = {
   },
 
   clickMe() {
-    layout.refs.txt1.setProperty(ui.prop.MORE, {
+    layout.$refs.txt1.setProperty(ui.prop.MORE, {
       color: 0xff0000,
       text: 'click',
     })
@@ -51,7 +51,7 @@ const layout = {
 const methods = {
   updateText(text) {
     log.log('click me again')
-    layout.refs.txt1.setProperty(ui.prop.MORE, {
+    layout.$refs.txt1.setProperty(ui.prop.MORE, {
       color: 0xff0000,
       text,
     })
