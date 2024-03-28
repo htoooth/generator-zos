@@ -1,0 +1,64 @@
+{
+  "configVersion": "v3",
+  "app": {
+    "appId": <%- appId %>,
+    "appName": "<%- appName %>-Extension",
+    "extType": "workout",
+    "appType": "app",
+    "version": {
+      "code": 1,
+      "name": "0.0.1"
+    },
+    "icon": "icon.png",
+    "vender": "Zepp OS Developer",
+    "description": "A Zepp OS Workout Extension"
+  },
+  "permissions": [
+    "data:os.device.info",
+    "device:os.geolocation"
+  ],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "<%- apiLevel %>",
+      "target": "<%- apiLevel %>",
+      "minVersion": "<%- apiLevel %>"
+    }
+  },
+  "targets": {
+    "common": {
+      "module": {
+        "data-widget": {
+          "widgets": [{
+            "path": "data-widget/running-status/index.page",
+            "runtime": {
+              "ability": [{
+                "type": 1,
+                "subType": [1, 2]
+              }]
+            }
+          }]
+        }
+      },
+      "platforms": [
+        {
+          "st": "r",
+          "dw": 480
+        },
+        {
+          "st": "s",
+          "dw": 390
+        }
+      ]
+    }
+  },
+  "i18n": {
+    "en-US": {
+      "appName": "<%- appName %>-Workout Extension"
+    },
+    "zh-CN": {
+      "appName": "Zepp OS运动扩展"
+    }
+  },
+  "defaultLanguage": "en-US",
+  "debug": false
+}

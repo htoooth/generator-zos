@@ -1,0 +1,6 @@
+msgid "hi"
+msgstr "你好, Zepp OS!"
+msgid "os_info"
+msgstr "系统信息"
+msgid "app_info"
+msgstr "应用信息"

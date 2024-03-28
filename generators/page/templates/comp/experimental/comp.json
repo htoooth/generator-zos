@@ -1,0 +1,7 @@
+{
+  "name": "comp1",
+  "type": "component",
+  "runtime": "device",
+  "layout": "./layout",
+  "assets": "./assets"
+}

@@ -1,11 +1,7 @@
-'use strict'
-const Generator = require('yeoman-generator')
-const chalk = require('chalk')
-const yosay = require('yosay')
-const path = require('path')
-const _ = require('lodash')
-const extend = require('deep-extend')
-const mkdirp = require('mkdirp')
+import path from 'node:path'
+import fs from 'node:fs'
+import _ from 'lodash'
+import { ZosGenerator } from '../../generator.js'
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -20,83 +16,67 @@ function parseScopedName(name) {
   return parseResult
 }
 
-module.exports = class extends Generator {
+export default class extends ZosGenerator {
   constructor(args, opts) {
     super(args, opts)
 
     this.argument('action', { type: String, required: true })
     this.argument('appPath', {
       type: String,
-      description: 'Your project name',
+      description: 'Your project path',
       required: false,
       default: process.cwd(),
-    })
-    this.option('install', {
-      type: Boolean,
-      default: false,
-      alias: 'i',
-      description: 'Install dependencies',
     })
 
     this.option('type', {
       type: String,
       default: 'app',
-      alias: 't',
       description: 'Project type',
+    })
+
+    this.option('template', {
+      type: String,
+      default: 'vanilla',
+      description: 'template type',
+      alias: 't'
+    })
+
+    this.option('api', {
+      type: String,
+      default: 'v3.0',
+      description: 'api level',
     })
   }
 
   initializing() {
-    this.props = Object.assign({}, parseScopedName(this.options.appPath))
+    this.props = { ...parseScopedName(this.options.appPath) }
   }
 
   default() {
-    if (this.options.action === 'new') {
-      mkdirp.sync(this.options.appPath)
+    if (this.options.action === 'new' || this.options.action === 'create') {
+      fs.mkdirSync(this.options.appPath, { recursive: true })
       this.destinationRoot(this.destinationPath(this.options.appPath))
     }
   }
 
-  _genBlankProject() {
+  _genProject() {
     const appName = this.props.localName
     const appId = getRandomNumber(20000, 30000)
+    const apiLevel = this.options.api
 
     switch (this.options.type) {
       case 'app': {
-        this.fs.copyTpl(
-          this.templatePath('app/blank'),
-          this.destinationPath(),
-          {
-            appName,
-            appId,
-          },
-          undefined,
-          {
-            globOptions: {
-              dot: true,
-            },
-          },
-        )
+        const appTemp = `app/${this.options.template}`
+        this._copyTemplate(appTemp, {
+          appName,
+          appId,
+          apiLevel: apiLevel.substring(1),
+        })
         break
       }
 
-      case 'wf':
-      case 'watchface': {
-        this.fs.copyTpl(
-          this.templatePath('watchface/blank'),
-          this.destinationPath(),
-          {
-            appName,
-            appId,
-          },
-          undefined,
-          {
-            globOptions: {
-              dot: true,
-            },
-          },
-        )
-        break
+      default: {
+        this.log('no action')
       }
     }
   }
@@ -105,27 +85,40 @@ module.exports = class extends Generator {
     switch (this.options.action) {
       case 'new':
       case 'create': {
-        this._genBlankProject()
+        this._genProject()
         break
       }
 
       case 'init': {
-        this._genBlankProject()
+        this._genProject()
         break
       }
 
       default: {
+        this.log('no action')
       }
     }
   }
 
-  install() {
-    if (this.options.install) {
-      this.installDependencies({
-        npm: true,
-        bower: false,
-        yarn: false,
-      })
+  install() {}
+
+  end() {
+    const cwd = process.cwd()
+    const root = path.join(cwd, this.options.appPath)
+
+    const cdProjectName = path.relative(cwd, root)
+    console.log(`\nDone. Now run:\n`)
+    if (root !== cwd) {
+      console.log(
+        `  cd ${
+          cdProjectName.includes(' ') ? `"${cdProjectName}"` : cdProjectName
+        }`,
+      )
     }
+
+    const pkgManager = 'npm'
+    console.log(`  ${pkgManager} install`)
+    console.log(`  zeus dev`)
+    console.log()
   }
 }
