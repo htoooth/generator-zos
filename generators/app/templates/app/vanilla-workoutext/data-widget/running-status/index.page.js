@@ -1,18 +1,18 @@
 import { log } from '@zos/utils'
-import { style } from './index.layout'
+import { layout } from './index.layout'
 
 DataWidget({
   state: {},
   onInit() {
-    log.log('page onInit invoked')
+    log.log('data-widget onInit invoked')
   },
 
   build() {
-    // TODO: your ui
-    log.log('page build invoked')
+    layout.render(this)
+    log.log('data-widget build invoked')
   },
 
   onDestroy() {
-    log.log('page onDestroy invoked')
+    log.log('data-widget onDestroy invoked')
   },
 })

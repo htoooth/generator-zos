@@ -11,7 +11,7 @@ export { ui }
 export const { width: DEVICE_WIDTH, height: DEVICE_HEIGHT } = getDeviceInfo()
 
 export function push(obj) {
-  if (obj.index) {
+  if ('index' in obj) {
     obj.url = getPackageInfo().pages[obj.index]
     _push(obj)
   }

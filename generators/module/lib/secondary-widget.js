@@ -36,9 +36,13 @@ export default class SecondaryWidgetGenCmd extends BaseGenCmd {
 
     if (!config) {
       config = module[moduleKey] = {
-        widgets: [{
-          path: resolvedModulePath,
-        }],
+        widgets: [
+          {
+            path: resolvedModulePath,
+            icon: 'icon.png',
+            name: 'secondary-widget',
+          },
+        ],
       }
 
       return
@@ -56,6 +60,8 @@ export default class SecondaryWidgetGenCmd extends BaseGenCmd {
 
     config.widgets.push({
       path: resolvedModulePath,
+      icon: 'icon.png',
+      name: 'secondary-widget',
     })
   }
 
@@ -71,7 +77,7 @@ export default class SecondaryWidgetGenCmd extends BaseGenCmd {
     { moduleKey, modulePath },
   ) {
     const resolvedModulePath = this.resolveModulePath(moduleKey, modulePath)
-    const index = config.widgets.findIndex(w => w.path === resolvedModulePath)
+    const index = config.widgets.findIndex((w) => w.path === resolvedModulePath)
 
     if (index < 0) {
       this.gen.log(

@@ -56,6 +56,7 @@ export default class AppWidgetGenCmd extends BaseGenCmd {
 
     config.widgets.push({
       path: resolvedModulePath,
+      icon: 'icon.png'
     })
   }
 

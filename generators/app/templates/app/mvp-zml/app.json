@@ -19,9 +19,9 @@
   ],
   "runtime": {
     "apiVersion": {
-      "compatible": "3.0",
-      "target": "3.0",
-      "minVersion": "3.0"
+      "compatible": "<%- apiLevel %>",
+      "target": "<%- apiLevel %>",
+      "minVersion": "<%- apiLevel %>"
     }
   },
   "debug": false,
@@ -47,21 +47,22 @@
       },
       "platforms": [
         {
-          "st": "r"
+          "st": "r",
+          "dw": 480
         },
         {
-          "st": "s"
-        },
-        {
-          "st": "b"
+          "st": "s",
+          "dw": 390
         }
-      ],
-      "designWidth": 480
+      ]
     }
   },
   "i18n": {
     "en-US": {
       "appName": "<%- appName %>"
+    },
+    "zh-CN": {
+      "appName": "Zepp OS应用"
     }
   },
   "defaultLanguage": "en-US"

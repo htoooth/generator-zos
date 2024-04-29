@@ -36,9 +36,21 @@ export default class DataWidgetGenCmd extends BaseGenCmd {
 
     if (!config) {
       config = module[moduleKey] = {
-        widgets: [{
-          path: resolvedModulePath,
-        }],
+        widgets: [
+          {
+            path: resolvedModulePath,
+            icon: 'icon.png',
+            name: 'data-widget',
+            runtime: {
+              ability: [
+                {
+                  type: 1,
+                  subType: [],
+                },
+              ],
+            },
+          },
+        ],
       }
 
       return
@@ -56,6 +68,16 @@ export default class DataWidgetGenCmd extends BaseGenCmd {
 
     config.widgets.push({
       path: resolvedModulePath,
+      icon: 'icon.png',
+      name: 'data-widget',
+      runtime: {
+        ability: [
+          {
+            type: 1,
+            subType: [],
+          },
+        ],
+      },
     })
   }
 
@@ -71,7 +93,7 @@ export default class DataWidgetGenCmd extends BaseGenCmd {
     { moduleKey, modulePath },
   ) {
     const resolvedModulePath = this.resolveModulePath(moduleKey, modulePath)
-    const index = config.widgets.findIndex(w => w.path === resolvedModulePath)
+    const index = config.widgets.findIndex((w) => w.path === resolvedModulePath)
 
     if (index < 0) {
       this.gen.log(

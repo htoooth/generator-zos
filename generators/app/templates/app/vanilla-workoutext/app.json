@@ -3,8 +3,8 @@
   "app": {
     "appId": <%- appId %>,
     "appName": "<%- appName %>-Extension",
-    "extType": "workout",
     "appType": "app",
+    "extType": "workout",
     "version": {
       "code": 1,
       "name": "0.0.1"
@@ -33,7 +33,7 @@
             "runtime": {
               "ability": [{
                 "type": 1,
-                "subType": [1, 2]
+                "subType": []
               }]
             }
           }]
@@ -43,10 +43,6 @@
         {
           "st": "r",
           "dw": 480
-        },
-        {
-          "st": "s",
-          "dw": 390
         }
       ]
     }

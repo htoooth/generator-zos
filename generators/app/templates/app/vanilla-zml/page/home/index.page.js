@@ -11,6 +11,7 @@ Page(
 
     build() {
       this.log('page build invoked')
+      // your ui code
     },
 
     onDestroy() {
