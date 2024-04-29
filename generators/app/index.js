@@ -61,7 +61,7 @@ export default class extends ZosGenerator {
         name: "template",
         message: "Your project template",
         choices: async () => {
-          return fs.readdirSync(this.templatePath('app'))
+          return fs.readdirSync(this.templatePath(this.options.appType))
         }
       },
     ]);
@@ -82,9 +82,10 @@ export default class extends ZosGenerator {
     const apiLevel = this.options.apiLevel
 
     switch (this.options.appType) {
-      case 'app': {
-        const appTemp = `app/${this.options.template}`
-        this._copyTemplate(appTemp, {
+      case 'app':
+      case 'workout': {
+        const appTpl = `${this.options.appType}/${this.options.template}`
+        this._copyTemplate(appTpl, {
           appName,
           appId,
           apiLevel,
@@ -127,15 +128,15 @@ export default class extends ZosGenerator {
     console.log(`\nDone. Now run:\n`)
     if (root !== cwd) {
       console.log(
-        `  cd ${
+        `$  cd ${
           cdProjectName.includes(' ') ? `"${cdProjectName}"` : cdProjectName
         }`,
       )
     }
 
     const pkgManager = 'npm'
-    console.log(`  ${pkgManager} install`)
-    console.log(`  zeus dev`)
+    console.log(`$  ${pkgManager} install`)
+    console.log(`$  zeus dev`)
     console.log()
   }
 }
