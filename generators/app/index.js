@@ -28,7 +28,7 @@ export default class extends ZosGenerator {
       default: process.cwd(),
     })
 
-    this.option('type', {
+    this.option('appType', {
       type: String,
       default: 'app',
       description: 'Project type',
@@ -36,20 +36,37 @@ export default class extends ZosGenerator {
 
     this.option('template', {
       type: String,
-      default: 'vanilla',
-      description: 'template type',
-      alias: 't'
+      description: 'template project name',
     })
 
-    this.option('api', {
-      type: String,
-      default: 'v3.0',
+    this.option('apiLevel', {
+      type: (str) => str,
+      default: '3.0',
       description: 'api level',
     })
   }
 
   initializing() {
     this.props = { ...parseScopedName(this.options.appPath) }
+  }
+
+  async prompting() {
+    if (this.options.template) {
+      return
+    }
+
+    const answers = await this.prompt([
+      {
+        type: "list",
+        name: "template",
+        message: "Your project template",
+        choices: async () => {
+          return fs.readdirSync(this.templatePath('app'))
+        }
+      },
+    ]);
+
+    Object.assign(this.options, answers)
   }
 
   default() {
@@ -62,15 +79,15 @@ export default class extends ZosGenerator {
   _genProject() {
     const appName = this.props.localName
     const appId = getRandomNumber(20000, 30000)
-    const apiLevel = this.options.api
+    const apiLevel = this.options.apiLevel
 
-    switch (this.options.type) {
+    switch (this.options.appType) {
       case 'app': {
         const appTemp = `app/${this.options.template}`
         this._copyTemplate(appTemp, {
           appName,
           appId,
-          apiLevel: apiLevel.substring(1),
+          apiLevel,
         })
         break
       }
