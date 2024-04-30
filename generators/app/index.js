@@ -83,6 +83,7 @@ export default class extends ZosGenerator {
 
     switch (this.options.appType) {
       case 'app':
+      case 'watchface':
       case 'workout': {
         const appTpl = `${this.options.appType}/${this.options.template}`
         this._copyTemplate(appTpl, {
@@ -94,7 +95,7 @@ export default class extends ZosGenerator {
       }
 
       default: {
-        this.log('no action')
+        this.log('no appType')
       }
     }
   }
